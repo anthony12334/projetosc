@@ -1,0 +1,57 @@
+#+TITLE: Simulador de Estacionamento
+#+AUTHOR: João Augusto T. Laner
+#+DATE: 2026-06-15
+#+OPTIONS: num:nil, toc:nil
+
+
+
+** Simulador de Estacionamento
+
+Você é o/a gerente de um estacionamento em linha reta na capital do RS. E recebe muitos veículos por dia,
+que podem variar entre *Ônibus, Van e Carro*.
+
+Depois de muito tempo anotando e fazendo os cálculos a mão, você gostaria de criar um sistema que calculasse
+o tempo que cada carro ficou para poder cobrar seus clientes corretamente e poder gastar seu tempo que sobrou
+com tarefas mais legais.
+
+Esse projeto é para desenvolver e reforçar as habilidades de vocês com Python. Espero que se divirtam! :)
+
+*** As Classes:
+
+- As classes Ônibus, Van e Carro, devem ser herdadas de Veículo. E cada veículo deve ter como atributos, *uma placa (str), um peso (float), uma cor (str), o nome do condutor (str) e uma capacidade de passageiros (int)*, que devem ser 23, 12 e 5, respectivamente.
+
+- A classe Vaga, tem um atributo que é o veículo que ela guarda e também a capacidade (int), que é proporcional ao número de passageiros que ela tem, um horário de entrada, e o atributo disponível (bool).
+
+-A classe Estacionamento possui uma lista de Vagas como parâmetro.
+
+
+*** Os métodos:
+
+**** Veículo:
+- As classes que herdam de Veículo não possuem métodos
+
+**** Vaga:
+- A classe Vaga não possui método
+
+
+**** Estacionamento:
+- A classe Estacionamento possui a principal lógica do programa. Um template da classe está disponível <inserir_link>.
+
+- ~def estacionar(self, veiculo:Veiculo, numero_vaga:int)~ /multiplas assinaturas/
+- ~def estacionar(self, veiculo:Veciulo, numero_vaga:int, horario: datetime.time)~
+- ~def verificar_horario(self, numero_vaga:int)~
+- ~def checkout(self, vaga:)~
+
+*** Descrição:
+
+- O método ~estacionar~ tem múltiplas assinaturas e vincula um carro a uma vaga. Se o carro for muito grande para a vaga, crie um erro customizado que dispara quando tenta estacionar. Caso a vaga já esteja ocupada, lance outro erro customizado, indicando que a vaga já está ocupada. Caso nenhum horário seja fornecido, o horário atual deve ser informado, para isso use a biblioteca ~datetime~. Do contrário, instaure um objeto da classe datetime (procure a [[https://docs.python.org/3/library/datetime.html][documentação]]) e passe por parâmetro. Lembre-se de mudar a disponibilidade da vaga.
+
+- O método ~verificar_horario~ recebe o número da vaga como parâmetro, é necessário verificar se o número está dentro dos limites da lista, caso contrátio, deve-se levantar um erro do tipo ~IndexError~. O método deve pegar o em que a vaga foi estacionada e o calcular a diferença entre o horário atual e o horário do estacionamento. Para realizar, utilize a biblioteca ~timedelta~ presente dentro de ~datetime~. O método deve retornar, em minutos, o tempo total de estacionamento.
+
+- O método ~checkout~ recebe uma vaga para liberar e baseado nos minutos calculador pela função ~verificar_horario~ deve calcular qual o valor do estacionamento. É sabido que para *ônibus o preço é de R$ 0,10/minuto*; já para *Vans, o preço é de R$ 0,09/minuto* e para *carros o preço é de R$ 0,08 por minuto usado*. Se qualquer veículo passar de 10h estacionado, ele tem direito a um desconto de 10% no valor total do estacionamento, mas caso ele permanceça por menos de 2h, o valor de cada minuto é dobrado.
+
+
+*** O menu:
+
+Para essa aplicação ser interativa é necessário criar um menu interativo. Dê uma olhada no arquivo *main.py* para maiores inspirações
+
